@@ -1,3 +1,6 @@
+xAxis = true
+yAxis = false
+zAxis = false
 
 try (destroydialog _objectSpacer) catch()
 rollout _objectSpacer "Objects Spacer"
@@ -34,21 +37,21 @@ rollout _objectSpacer "Objects Spacer"
 	(
 		if state == 1 then
 		(
-			xAxis = true
-			yAxis = false
-			zAxis = false
+			global xAxis = true
+			global yAxis = false
+			global zAxis = false
 		)
 		if state == 2 then
 		(
-			xAxis = false
-			yAxis = true
-			zAxis = false
+			global xAxis = false
+			global yAxis = true
+			global zAxis = false
 		)
 		if state == 3 then
 		(
-			xAxis = false
-			yAxis = false
-			zAxis = true
+			global xAxis = false
+			global yAxis = false
+			global zAxis = true
 		)
 	)
 	button _go "Go!"
@@ -67,12 +70,15 @@ rollout _objectSpacer "Objects Spacer"
 			-- Append selected Objects to our objArray if obj doesn't already exist in the array
 			for i = 1 to selectedObj.count do 
 				appendIfUnique objArray selectedObj[i]
+			print(objArray as string)
 
 			-- Move objects along wished axis
 			if xAxis == true then
 			(
+				print("xAxis is enabled")
 				if _moveTotal.enabled == true then
 				(
+					print("I am total")
 					for i = 1 to objArray.count do
 					(
 						objArray[i].pos = [basePosition.x + (distanceDeterminator*(i-1)), basePosition.y, basePosition.z]
@@ -80,6 +86,7 @@ rollout _objectSpacer "Objects Spacer"
 				)
 				else if _moveSingle.enabled == true then
 				(
+					print("I am single")
 					for i = 1 to objArray.count do
 					(
 						objArray[i].pos = [basePosition.x + (_moveSingle.value*(i-1)), basePosition.y, basePosition.z]
